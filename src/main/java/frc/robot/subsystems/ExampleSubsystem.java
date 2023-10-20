@@ -5,17 +5,34 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
-  private final CANSparkMax motor = new CANSparkMax (1, MotorType.kBrushless);
+  private final CANSparkMax motor;
+  private final CANSparkMax motor1;
+  private final AnalogPotentiometer entrance;
+  private final AnalogPotentiometer staging;
+  private final ColorSensorV3 storage;
 
+
+  
+
+  
   /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
-
+  public ExampleSubsystem() {
+   motor = new CANSparkMax(13, MotorType.kBrushless);
+   motor1 = new CANSparkMax(14, MotorType.kBrushless);
+   entrance = new AnalogPotentiometer(0);
+   staging = new AnalogPotentiometer(1);
+   storage = new ColorSensorV3(I2C.Port.kMXP);
+      
+  }
   /**
    * Example command factory method.
    *
@@ -44,6 +61,7 @@ public class ExampleSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     motor.set(0.5);
+    
   }
 
   @Override
